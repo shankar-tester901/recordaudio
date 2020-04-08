@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <title>Audio to Text Conversion</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://js.zohostatic.com/catalystclient/0.0.1/catalystWebSDK.js"></script>
+
+        <script>
+            let cred = new catalystCredential();
+            cred.loadFromJSON({
+                project_Id: 003439,
+                zaid: 010017529
+            });
+            catalyst.initApp(cred, {});
+            catalyst.auth.isUserAuthenticated().then(resp => {
+                console.log('Person has logged in -------------  ' + resp);
+            }).catch(err => {
+                window.location.href = "/app/login.html";
+            });
+
+        </script>
+    </head>
+
+    <body onload="hideInfo()">
+
+        <div class="container">
+            <h2>Speak and You Shall Receive</h2>
+            <br>
+            <br>
+            <div class="card-deck">
+
+
+                <div class="card bg-primary">
+                    <div class="card-body text-center">
+                        <p class="card-text">Speak</p>
+                        <p class="card-text"><button id="recordButton">Record Audio</button>
+                            <p><button id="transcribeButton" disabled>Stop Recording</button></p>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="spinner-grow text-info" id="spinner_div"></div>
+
+
+                <div class="card bg-warning" id="transcript_div">
+                    <div class="card-body text-center">
+                        <p class="card-text">
+
+                            <div id="output"></div>
+
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="card bg-success" id="download_transcript_div">
+                    <div class="card-body text-center">
+                        <p class="card-text">
+                            <div id="Transcript_File">
+                                <a href="" id="download_transcript" style="font-weight:bold; color:#dcf32e">
+                                    Download Transcript File
+                                </a>
+                            </div>
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card bg-danger" id="download_audio_div">
+                    <div class="card-body text-center">
+                        <p class="card-text">
+
+                            <div id="Audio_File">
+                                <a href="" id="download_audio" style="font-weight:bold; color:#dcf32e">
+                                    Download Audio File
+                                </a>
+                            </div>
+
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+        <script src="main.js"></script>
+        <script>
+            catalyst.notification.enableNotification()
+                .then(resp => {
+                    catalyst.notification.messageHandler = msg => {
+                        console.log('Push Notification Received on the Client Side is   ... ' + msg);
+                        var id_array = msg.split(",");
+
+                        //$('#download_audio').text("/baas/v1/project/343000000055329/folder/343000000055390/file/" + id_array[0] + "/download");
+                        $('a#download_transcript').attr("href", "/baas/v1/project/343000000055329/folder/343000000055390/file/" + id_array[1] + "/download");
+                        $('a#download_audio').attr("href", "/baas/v1/project/343000000055329/folder/343000000055390/file/" + id_array[0] + "/download");
+
+
+                    }
+
+                });
+        </script>
+    </body>
+
+</html>

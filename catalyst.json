@@ -1,0 +1,20 @@
+{
+  "applogic": {
+    "targets": [
+      "record_audio"
+    ],
+    "ignore": [],
+    "source": "applogic"
+  },
+  "functions": {
+    "targets": [
+      "record_audio",
+      "test_audio"
+    ],
+    "ignore": [],
+    "source": "functions"
+  },
+  "client": {
+    "source": "client"
+  }
+}

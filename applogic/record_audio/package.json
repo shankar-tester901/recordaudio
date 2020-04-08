@@ -1,0 +1,15 @@
+{
+	"name": "record_audio",
+	"version": "1.0.0",
+	"main": "index.js",
+	"author": "shankarr+1003@zohocorp.com",
+	"dependencies": {
+		"@google-cloud/speech": "^3.5.4",
+		"buffer-to-stream": "^1.0.0",
+		"express": "^4.17.1",
+		"formidable": "^1.2.2",
+		"fs": "0.0.1-security",
+		"multer": "^1.4.2",
+		"zcatalyst-sdk-node": "0.0.21"
+	}
+}

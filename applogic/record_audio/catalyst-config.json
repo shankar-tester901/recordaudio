@@ -1,0 +1,10 @@
+{
+	"deployment": {
+		"name": "record_audio",
+		"stack": "node10",
+		"type": "applogic"
+	},
+	"execution": {
+		"main": "index.js"
+	}
+}
